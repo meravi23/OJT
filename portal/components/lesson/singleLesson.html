@@ -1,4 +1,34 @@
-<<<<<<< HEAD
-=======
+<<<<<<< HEAD=======>>>>>>> 11e8edb05cdb7a54feaccc1ecc797bb7e69c4c5b
+    <div id="wrapper">
+        <header></header>
+        <div id="page-wrapper">
+            <h2 class="page-title">{{les.num }}שיעור מס' </h2>
+            <div class="scrolling-table-wrapper">
+                <div class="scrolling-table">
+                    <table class="table-striped table-bordered table-hover midrows">
+                        <thead>
+                            <tr>
+                                <th class="small-cell">שם פרטי</th>
+                                <th class="small-cell">שם משפחה</th>
+                                <th class="small-cell">נוכחות</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="paticipant in participants">
+                                <td class="small-cell">{{paticipant.fname}}</td>
+                                <td class="small-cell">{{paticipant.lname}}</td>
+                                <td class="small-cell">
+                                    <select ng-model="participant.status"
+                                        ng-change="UpdateParticipantStatus(participant)">
+                                        <option value="0">נוכח</option>
+                                        <option value="1">נעדר</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
->>>>>>> 11e8edb05cdb7a54feaccc1ecc797bb7e69c4c5b
+        </div>
+    </div>

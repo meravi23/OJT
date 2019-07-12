@@ -12,6 +12,27 @@ function($window, $scope, $stateParams, $rootScope, $state, $timeout, server, pe
 	$scope.flowState = {};
 	//update the permissions to match the current course context
 	permissions.getRole($scope.courseId);
+	//lessons in each course
+	//testing hard coded:
+	$scope.lessons = [
+		{
+			num: 1,
+			date: "12-05-2019",
+			time: "16:00"
+		},
+		{
+			num: 2,
+			date: "15-05-2019",
+			time: "16:00"
+		},
+		{
+			num: 3,
+			date: "19-05-2019",
+			time: "16:00"
+		}
+	];
+
+	console.log(lessons);
 	
 	//populates the course object with relevant data
 	getCourseData = function ()
