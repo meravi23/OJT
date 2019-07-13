@@ -5,6 +5,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 		//console.log($rootScope);
 
 		$scope.courseid = $stateParams.courseId;
+		console.log("Course ID: " + $scope.courseid);
 
 		$scope.alertcontrol = {};
 
@@ -241,7 +242,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			var data = {};
 			server.requestPhp(data, "GetEnrollmentTagsForStudents").then(function (data) {
 				$scope.StudentsEnrollmentTags = data;
-				console.log($scope.StudentsEnrollmentTags);
+				// console.log($scope.StudentsEnrollmentTags);
 			});
 		}
 
@@ -273,7 +274,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			data.search = $scope.displayedEnrollments[roleid].search;
 			data.roleid = roleid;
 			server.requestPhp(data, 'GetCourseEnrollmentProfiles').then(function (data) {
-				console.log(data);
+				// console.log(data);
 				$scope.displayedEnrollments[roleid].users = data.enrolled;
 				$scope.displayedEnrollments[roleid].pageCount = data.pages;
 				$scope.displayedEnrollments[roleid].loading = false;
@@ -613,54 +614,32 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			alert("שמירת פעולה זו תגרום לשינוי הסטטוסים של החניכים והמדריכים בקורס זה!");
 		}
 
-		var loadAllMeetings = function () {
-			console.log("loadAllMeetings: ");
+		$scope.lessons = [];
+		loadAllMeetings = function () {
 			var data = {};
-			data.courseid = $scope.courseId;
+			data.courseid = $scope.courseid;
 			data.type = "post";
 			server.requestPhp(data, "GetLessonsOfCourse").then(function (data) {
+				console.log(data);
 				if (data && !data.error) {
-					$scope.meetingIds = data.filter(wasMeetingActivated).sort(function (a, b) {
-						return b.checkin - a.checkin;
-					});
-					for (var i = 0; i < $scope.meetingIds.length; i++) {
-						$scope.meetingIds[i].ignoreMe = parseInt($scope.meetingIds[i].ignoreMe);
-					}
-					loadMeetingBatch(0);
-					if ($scope.meetingIds.length == 0) {
-						$scope.loading = false;
+					for (var i = 0; i < data.length; i++) {
+						$scope.lessons.push(data[i]);
+						// console.log("lesson ID: " + $scope.lessons[i].lessonid);
+						// console.log("lesson date: " + $scope.lessons[i].beginningdate);
 					}
 				}
+				// $scope.lesson.beginningdate = new Date(parseInt($scope.lesson.beginningdate));
+				// $scope.lesson.date = moment($scope.lesson.beginningdate).format('DD/MM/YY');
+				// $scope.lesson.hour = moment($scope.lesson.beginningdate).format('HH:mm');
 			});
-		}
+		};
 
+		loadAllMeetings();
 
-		//lessons in each course
-		//testing hard coded:
-		$rootScope.lessons = [{
-				num: 1,
-				date: "12-05-2019",
-				time: "16:00"
-			},
-			{
-				num: 2,
-				date: "15-05-2019",
-				time: "16:00"
-			},
-			{
-				num: 3,
-				date: "19-05-2019",
-				time: "16:00"
-			}
-		];
-
-
-		$scope.goToLessonPage = function (les) {
+		$scope.goToLessonPage = function () {
 			$state.transitionTo('singleLesson', {
-				lessonId: $stateParams["lessonId"]
-
+				lessonId: $scope.lessons.num
 			});
-
 		}
 
 	}

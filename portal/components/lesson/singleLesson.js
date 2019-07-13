@@ -17,6 +17,14 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
             },
         ]
 
+        $scope.getLessonById = function () {
+			var data = {};
+			data.lessonid = $scope.lessonId;
+			server.requestPhp(data, "GetLessonById").then(function (data) {
+				$scope.lesson = data.lesson;
+	
+			});
+		};
 
     }
 ]);

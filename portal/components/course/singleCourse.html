@@ -268,8 +268,8 @@
 							<tr ng-repeat="lesson in lessons">
 								<td class="small-cell" ng-click="goToLessonPage(lesson)">
 									{{lesson.num}}</td>
-								<td class="small-cell">{{lesson.date}}</td>
-								<td class="small-cell">{{lesson.time}}</td>
+								<td class="small-cell">{{lesson.beginningdate | date}}</td>
+								<td class="small-cell">{{lesson.beginningdate | date : "HH:mm"}}</td>
 							</tr>
 						</tbody>
 					</table>
