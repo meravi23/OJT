@@ -19,7 +19,7 @@
                                 <td class="small-cell">{{paticipant.lastname}}</td>
                                 <td class="small-cell">
                                     <select ng-model="participant.attendanceStatus" ng-change="UpdateParticipantStatus(participant)"
-                                        ng-options="status.id as status.name for status in statuses">
+                                        ng-options="status.value as status.name for status in statuses">
                                     </select>
                                 </td>
                             </tr>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div>
-                <a ui-sref="singleCourse"><button type="button" class="button card-control">חזרה לקורס</button></a>
+                <button type="button" ng-click="goBackToCourse()" class="button card-control">חזרה לקורס</button>
             </div>
         </div>
     </div>

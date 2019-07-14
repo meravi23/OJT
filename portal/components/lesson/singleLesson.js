@@ -1,8 +1,8 @@
 apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParams', '$http', '$q', 'userService', 'Upload', 'server',
-    function ($rootScope, $scope, $state, $stateParams, $http, $q, userService, Upload, server) {
+    function ($rootScope, $scope, $state, $stateParams, $http, $q, userService, Upload, server, $location) {
 
         console.log(JSON.stringify($stateParams));
-        
+
         $scope.lessonId = $stateParams.lessonNum;
         $scope.lessonNum = $stateParams.lessonId;
 
@@ -10,7 +10,7 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
         console.log("lesson ID: " + $scope.lessonNum);
 
 
-        
+
         $scope.getLessonById = function () {
             var data = {};
             data.lessonid = $scope.lessonId;
@@ -42,43 +42,22 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
 
         function getAttendanceStatuses() {
             var data = {};
-            server.requestPhp(data, 'GetAttendanceStatuses').then(function(data) {
+            server.requestPhp(data, 'GetAttendanceStatuses').then(function (data) {
                 $scope.statuses = data;
                 console.log("attendance statuses: " + JSON.stringify($scope.statuses));
             });
         }
 
         getAttendanceStatuses();
-        
-        
 
+        $scope.goBackToCourse = function () {
+            window.history.back();
+        }
 
-
-        // $scope.addendanceStatuses = [
-        //     {
-        //         code: "0",
-        //         desc: "נכח/ה"
-        //     },
-        //     {
-        //         code: "1",
-        //         desc: "איחר/ה"
-        //     },
-        //     {
-        //         code: "2",
-        //         desc: "לא נכח/ה"
-        //     },
-        //     {
-        //         code: "3",
-        //         desc: "טרם דיווח/ה"
-        //     }
-        // ]
         
-        $scope.UpdateParticipantStatus =  function(participant, lessonid){
+        $scope.UpdateParticipantStatus = function (participant, lessonid) {
 
         }
-        
-          
-
 
     }
 ]);
