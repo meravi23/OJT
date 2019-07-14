@@ -198,6 +198,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 		}
 
 		getGenders();
+		
 
 		//get religions list
 		$scope.religions = [];

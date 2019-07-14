@@ -18,8 +18,9 @@
                                 <td class="small-cell">{{paticipant.firstname}}</td>
                                 <td class="small-cell">{{paticipant.lastname}}</td>
                                 <td class="small-cell">
-                                    <select ng-model="participant.attendanceStatus" ng-change="UpdateParticipantStatus(participant)">
-                                        <option ng-repeat="status in addendanceStatuses" value="{{status.code}}">{{status.desc}}</option>
+                                    <select ng-model="participant.attendanceStatus" ng-change="UpdateParticipantStatus(participant)"
+                                        ng-options="status.id as status.name for status in statuses">
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
