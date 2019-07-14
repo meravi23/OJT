@@ -636,11 +636,13 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 
 		loadAllMeetings();
 
-		$scope.goToLessonPage = function () {
+		$scope.goToLessonPage = function (lesson) {
 			$state.transitionTo('singleLesson', {
-				lessonId: $scope.lessons.num
+				lessonId: lesson.num,
+				lessonNum: lesson.lessonid
 			});
 		}
 
+		
 	}
 ]);

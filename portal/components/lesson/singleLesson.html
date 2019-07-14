@@ -1,8 +1,8 @@
 <<<<<<< HEAD=======>>>>>>> 11e8edb05cdb7a54feaccc1ecc797bb7e69c4c5b
-    <div id="wrapper">
+    <div ng-if="isAdmin" id="wrapper">
         <header></header>
         <div id="page-wrapper">
-            <h2 class="page-title">{{lesson.num }}שיעור מס' </h2>
+            <h2 class="page-title"> שיעור מס'<span> {{lessonNum}}</span> </h2>
             <div class="scrolling-table-wrapper">
                 <div class="scrolling-table">
                     <table class="table-striped table-bordered table-hover midrows">
@@ -15,20 +15,19 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="paticipant in participants">
-                                <td class="small-cell">{{paticipant.fname}}</td>
-                                <td class="small-cell">{{paticipant.lname}}</td>
+                                <td class="small-cell">{{paticipant.firstname}}</td>
+                                <td class="small-cell">{{paticipant.lastname}}</td>
                                 <td class="small-cell">
-                                    <select ng-model="participant.status"
-                                        ng-change="UpdateParticipantStatus(participant)">
-                                        <option value="0">נוכח</option>
-                                        <option value="1">נעדר</option>
-                                    </select>
+                                    <select ng-model="participant.attendanceStatus" ng-change="UpdateParticipantStatus(participant)">
+                                        <option ng-repeat="status in addendanceStatuses" value="{{status.code}}">{{status.desc}}</option>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
+            <div>
+                <a ui-sref="singleCourse"><button type="button" class="button card-control">חזרה לקורס</button></a>
+            </div>
         </div>
     </div>
