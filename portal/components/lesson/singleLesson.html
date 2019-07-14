@@ -14,7 +14,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="paticipant in participants">
+                            <tr ng-repeat="paticipant in participants | orderBy:'firstname'">
                                 <td class="small-cell">{{paticipant.firstname}}</td>
                                 <td class="small-cell">{{paticipant.lastname}}</td>
                                 <td class="small-cell">
