@@ -57,23 +57,21 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
             $state.go('singleCourse', { courseId: $scope.courseid })
         }
 
+//TODO replace lessonid with lesson num
 
         $scope.updateAttendanceStatusInLesson = function (participant) {
             // var lessonid = $scope.lessonId;
-            // if (participant.checkstudentid == null) {
-            //     addCheckStudentStatus(participant, lessonid);
-            // } else {
-                updateStudentStatus(participant);
-            // }
-        }
-
-
-        function updateStudentStatus(student) {
             var data = {};
-            data.id = student.userid;
-            data.attendanceStatus = student.attendanceStatus;
-            server.requestPhp(data, 'UpdateCheckStudentStatus').then(function (data) { });
+            if (participant.checkstudentid == null) {
+                data.id = participant.userid;
+                data.lessonid = $scope.lessonId;
+                server.requestPhp(data, 'addCheckStudentStatus').then(function (data) { });
+                console.log(JSON.stringify(data));
+            } else {
+                data.id = participant.userid;
+                data.attendanceStatus = participant.attendanceStatus;
+                server.requestPhp(data, 'UpdateCheckStudentStatus').then(function (data) { });
+            }
         }
-
     }
 ]);
