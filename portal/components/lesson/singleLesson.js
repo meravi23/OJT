@@ -5,7 +5,8 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
 
         $scope.lessonId = $stateParams.lessonNum;
         $scope.lessonNum = $stateParams.lessonId;
-
+        $scope.courseid = $rootScope.courseid;
+        console.log("Course ID: " + $scope.courseid);
         console.log("lesson number: " + $scope.lessonId);
         console.log("lesson ID: " + $scope.lessonNum);
 
@@ -40,23 +41,38 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
         getParticipants();
 
 
-        function getAttendanceStatuses() {
+        $scope.getAttendanceStatuses = function () {
             var data = {};
             server.requestPhp(data, 'GetAttendanceStatuses').then(function (data) {
                 $scope.statuses = data;
-                console.log("attendance statuses: " + JSON.stringify($scope.statuses));
+                //console.log("attendance statuses: " + JSON.stringify($scope.statuses));
             });
         }
 
-        getAttendanceStatuses();
+        $scope.getAttendanceStatuses();
+
 
         $scope.goBackToCourse = function () {
-            window.history.back();
+            // window.history.back();
+            $state.go('singleCourse', { courseId: $scope.courseid })
         }
 
-        
-        $scope.UpdateParticipantStatus = function (participant, lessonid) {
 
+        $scope.updateAttendanceStatusInLesson = function (participant) {
+            // var lessonid = $scope.lessonId;
+            // if (participant.checkstudentid == null) {
+            //     addCheckStudentStatus(participant, lessonid);
+            // } else {
+                updateStudentStatus(participant);
+            // }
+        }
+
+
+        function updateStudentStatus(student) {
+            var data = {};
+            data.id = student.userid;
+            data.attendanceStatus = student.attendanceStatus;
+            server.requestPhp(data, 'UpdateCheckStudentStatus').then(function (data) { });
         }
 
     }

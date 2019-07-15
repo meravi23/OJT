@@ -4,7 +4,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 
 		//console.log($rootScope);
 
-		$scope.courseid = $stateParams.courseId;
+		$rootScope.courseid = $stateParams.courseId;
 		console.log("Course ID: " + $scope.courseid);
 
 		$scope.alertcontrol = {};
@@ -121,6 +121,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 
 		}
 
+		//"projects" = syllabus
 		$scope.projects = [];
 
 		var getProjects = function () {
@@ -187,7 +188,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 
 		getCities();
 
-		//get genders list
+		//get gender list
 		$scope.genders = [];
 
 		var getGenders = function () {

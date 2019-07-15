@@ -14,12 +14,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="paticipant in participants | orderBy:'firstname'">
-                                <td class="small-cell">{{paticipant.firstname}}</td>
-                                <td class="small-cell">{{paticipant.lastname}}</td>
+                            <tr ng-repeat="participant in participants | orderBy:'firstname'">
+                                <td class="small-cell">{{participant.firstname}}</td>
+                                <td class="small-cell">{{participant.lastname}}</td>
                                 <td class="small-cell">
-                                    <select ng-model="participant.attendanceStatus" ng-change="UpdateParticipantStatus(participant)"
-                                        ng-options="status.value as status.name for status in statuses">
+                                    <select ng-model="participant.attendanceStatus" 
+                                            ng-change="updateAttendanceStatusInLesson(participant)"
+                                            ng-options="status.value as status.name for status in statuses">
                                     </select>
                                 </td>
                             </tr>

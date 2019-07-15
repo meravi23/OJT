@@ -201,8 +201,9 @@
 											</select>
 										</td>
 										<td class="small-cell" ng-class="{'warning':(user.genderid=='')}">
-											<select ng-model="user.genderid" ng-change="UpdateUserGender(user)"
-												ng-options="gender.genderid as gender.name for gender in genders">
+											<select ng-model="user.genderid"
+													ng-change="UpdateUserGender(user)"
+													ng-options="gender.genderid as gender.name for gender in genders">
 											</select>
 										</td>
 										<td class="small-cell" ng-class="{'warning':(user.religionid=='')}">
@@ -268,7 +269,7 @@
 							<tr ng-repeat="lesson in lessons">
 								<td class="small-cell" ng-click="goToLessonPage(lesson)">
 									{{lesson.num}}</td>
-								<td class="small-cell">{{lesson.beginningdate | date}}</td>
+								<td class="small-cell">{{lesson.beginningdate | date : 'yyyy-MM-dd'}}</td>
 								<td class="small-cell">{{lesson.beginningdate | date : "HH:mm"}}</td>
 							</tr>
 						</tbody>
