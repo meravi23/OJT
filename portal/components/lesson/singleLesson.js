@@ -3,13 +3,9 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
 
         console.log(JSON.stringify($stateParams));
 
-        $scope.lessonId = $stateParams.lessonNum;
-        $scope.lessonNum = $stateParams.lessonId;
+        $scope.lessonId = $stateParams.lessonId;
+        $scope.lessonNum = $stateParams.lessonNum;
         $scope.courseid = $rootScope.courseid;
-        console.log("Course ID: " + $scope.courseid);
-        console.log("lesson number: " + $scope.lessonId);
-        console.log("lesson ID: " + $scope.lessonNum);
-
 
 
         $scope.getLessonById = function () {
@@ -20,8 +16,8 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
                 $scope.lessonId = data.lessonid;
             });
         };
-
         $scope.getLessonById();
+
 
         $scope.participants = [];
         function getParticipants() {
@@ -48,7 +44,6 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
                 //console.log("attendance statuses: " + JSON.stringify($scope.statuses));
             });
         }
-
         $scope.getAttendanceStatuses();
 
 
@@ -57,19 +52,20 @@ apple.controller('singleLesson', ['$rootScope', '$scope', '$state', '$stateParam
             $state.go('singleCourse', { courseId: $scope.courseid })
         }
 
-//TODO replace lessonid with lesson num
 
         $scope.updateAttendanceStatusInLesson = function (participant) {
-            // var lessonid = $scope.lessonId;
             var data = {};
-            if (participant.checkstudentid == null) {
-                data.id = participant.userid;
-                data.lessonid = $scope.lessonId;
-                server.requestPhp(data, 'addCheckStudentStatus').then(function (data) { });
-                console.log(JSON.stringify(data));
+            data.student = participant;
+            data.lessonid = $stateParams.lessonId; // doesn't accept  $scope.lessonId  !
+            if (data.student.checkstudentid == null) {
+                server.requestPhp(data, 'AddCheckStudentStatus').then(function (data) {
+                    if (data.error != null) {
+                        alert(data.error);
+                    } else {
+                        console.log("Change in attendance has been saved.");
+                    }
+                });
             } else {
-                data.id = participant.userid;
-                data.attendanceStatus = participant.attendanceStatus;
                 server.requestPhp(data, 'UpdateCheckStudentStatus').then(function (data) { });
             }
         }

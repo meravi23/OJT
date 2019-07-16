@@ -90,7 +90,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			data.fieldId = fieldId;
 			data.userid = userId;
 			data.value = value;
-			server.requestPhp(data, 'UpdateUserEnrollmentField').then(function (data) {});
+			server.requestPhp(data, 'UpdateUserEnrollmentField').then(function (data) { });
 		};
 
 
@@ -199,7 +199,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 		}
 
 		getGenders();
-		
+
 
 		//get religions list
 		$scope.religions = [];
@@ -301,15 +301,15 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 					el.genderid = ($scope.genders.filter(function (gel) {
 						return gel.genderid == el.genderid;
 					})[0] || {
-						"genderid": null,
-						"name": "לא מוגדר"
-					}).name;
+							"genderid": null,
+							"name": "לא מוגדר"
+						}).name;
 					el.religionid = ($scope.religions.filter(function (rel) {
 						return rel.religionid == el.religionid;
 					})[0] || {
-						"religionid": null,
-						"name": "לא מוגדר"
-					}).name;
+							"religionid": null,
+							"name": "לא מוגדר"
+						}).name;
 					el.address = el.cityname + " " + el.address;
 					if (!el.birthday) {
 						el.birthday = "";
@@ -419,14 +419,14 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			var data = {};
 			data.religionid = user.religionid;
 			data.userid = user.userid;
-			server.requestPhp(data, 'UpdateUserReligion').then(function (data) {});
+			server.requestPhp(data, 'UpdateUserReligion').then(function (data) { });
 		};
 
 		$scope.UpdateUserGender = function (user) {
 			var data = {};
 			data.genderid = user.genderid;
 			data.userid = user.userid;
-			server.requestPhp(data, 'UpdateUserGender').then(function (data) {});
+			server.requestPhp(data, 'UpdateUserGender').then(function (data) { });
 		};
 
 		$scope.UpdateUserEnrollmentRole = function (user) {
@@ -437,7 +437,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 				var data = {};
 				data.enrollmentroleid = user.enrollmentroleid;
 				data.userid = user.userid;
-				server.requestPhp(data, 'UpdateUserEnrollmentRole').then(function (data) {});
+				server.requestPhp(data, 'UpdateUserEnrollmentRole').then(function (data) { });
 			}
 		};
 
@@ -447,7 +447,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			data.status = user.status;
 			data.userid = user.userid;
 			console.log(data);
-			server.requestPhp(data, 'UpdateUserStatus').then(function (data) {});
+			server.requestPhp(data, 'UpdateUserStatus').then(function (data) { });
 		};
 
 		$scope.UpdateEnrollmentTag = function (user) {
@@ -455,7 +455,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			data.courseid = $scope.course.courseid;
 			data.enrollmenttagid = user.enrollmenttagid;
 			data.userid = user.userid;
-			server.requestPhp(data, 'UpdateEnrollmentTag').then(function (data) {});
+			server.requestPhp(data, 'UpdateEnrollmentTag').then(function (data) { });
 		};
 
 		$scope.UpdateUserEnrollmentField = function (userId, enrollmentId, fieldId, value) {
@@ -464,7 +464,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			data.fieldId = fieldId;
 			data.userid = userId;
 			data.value = value;
-			server.requestPhp(data, 'UpdateUserEnrollmentField').then(function (data) {});
+			server.requestPhp(data, 'UpdateUserEnrollmentField').then(function (data) { });
 		};
 
 		$scope.addSubject = function (context) {
@@ -521,7 +521,7 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 			Upload.upload({
 				url: phpDomain + 'datagate.php?type=UploadSyllabusFile&token=' + $rootScope.userToken + '&v=' + version,
 				file: $files,
-				progress: function (e) {}
+				progress: function (e) { }
 			}).then(function (response, status, headers, config) {
 				if (response.data.error != null) {
 					alert(response.data.error);
@@ -620,19 +620,13 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 		loadAllMeetings = function () {
 			var data = {};
 			data.courseid = $scope.courseid;
-			data.type = "post";
 			server.requestPhp(data, "GetLessonsOfCourse").then(function (data) {
 				console.log(data);
 				if (data && !data.error) {
 					for (var i = 0; i < data.length; i++) {
 						$scope.lessons.push(data[i]);
-						// console.log("lesson ID: " + $scope.lessons[i].lessonid);
-						// console.log("lesson date: " + $scope.lessons[i].beginningdate);
 					}
 				}
-				// $scope.lesson.beginningdate = new Date(parseInt($scope.lesson.beginningdate));
-				// $scope.lesson.date = moment($scope.lesson.beginningdate).format('DD/MM/YY');
-				// $scope.lesson.hour = moment($scope.lesson.beginningdate).format('HH:mm');
 			});
 		};
 
@@ -640,11 +634,10 @@ apple.controller('singleCourse', ['$rootScope', '$scope', '$state', '$stateParam
 
 		$scope.goToLessonPage = function (lesson) {
 			$state.transitionTo('singleLesson', {
-				lessonId: lesson.num,
-				lessonNum: lesson.lessonid
+				lessonId: lesson.lessonid,
+				lessonNum: lesson.num
 			});
+			console.log(JSON.stringify($stateParams));
 		}
-
-		
 	}
 ]);

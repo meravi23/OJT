@@ -19,7 +19,7 @@
                                 <td class="small-cell">{{participant.lastname}}</td>
                                 <td class="small-cell">
                                     <select ng-model="participant.attendanceStatus" 
-                                            ng-change="updateAttendanceStatusInLesson(participant)"
+                                            ng-change="updateAttendanceStatusInLesson(participant, lessonId)"
                                             ng-options="status.value as status.name for status in statuses">
                                     </select>
                                 </td>
